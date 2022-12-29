@@ -6,7 +6,7 @@
 # 技术栈
 
  - C++（废话）
- - ![oatpp](https://oatpp.io) - Web框架
+ - [oatpp](https://oatpp.io) - Web框架
  - 目前处于测试状态，没有用到数据库，之后肯定会有的
 
 # 关于作者
