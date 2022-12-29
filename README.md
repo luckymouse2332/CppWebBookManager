@@ -14,7 +14,7 @@
 
  - 下载或使用`git clone`
 ```sh
-https://github.com/luckymouse2332/CppWebBookManager.git
+git clone https://github.com/luckymouse2332/CppWebBookManager.git
 ```
  - 创建build文件夹
 ```sh
