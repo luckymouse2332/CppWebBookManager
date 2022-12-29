@@ -8,7 +8,7 @@
  - C++（废话）
  - [oatpp](https://oatpp.io) - Web框架
  - 目前处于测试状态，没有用到数据库，之后肯定会有的
- - 使用CMake构建
+ - 使用[CMake](https://cmake.org/)构建
 
 # 部署方法
 
