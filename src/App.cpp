@@ -1,40 +1,40 @@
-#include "oatpp/web/server/HttpConnectionHandler.hpp"
+#include "controller/MyController.hpp"
+#include "AppComponents.hpp"
 
 #include "oatpp/network/Server.hpp"
-#include "oatpp/network/tcp/server/ConnectionProvider.hpp"
-
-#include "AppComponents.hpp"
 
 void run()
 {
-    // router
-    auto router = oatpp::web::server::HttpRouter::createShared();
+  AppComponent components;
 
-    // The router's http request handler
-    auto connectionHandler = oatpp::web::server::HttpConnectionHandler::createShared(router);
+  // router
+  OATPP_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, router);
 
-    // TCP connections provider
-    auto connectionProvider = oatpp::network::tcp::server::ConnectionProvider::createShared({"localhost", 8000, oatpp::network::Address::IP_4});
+  router->addController(std::make_shared<MyController>());
 
-    // HTTP server
-    oatpp::network::Server server(connectionProvider, connectionHandler);
+  // The router's http request handler
+  OATPP_COMPONENT(std::shared_ptr<oatpp::network::ConnectionHandler>, connectionHandler);
 
+  // TCP connections provider
+  OATPP_COMPONENT(std::shared_ptr<oatpp::network::ServerConnectionProvider>, connectionProvider);
 
-    auto port = connectionProvider->getProperty("port").getData();
-    // log
-    OATPP_LOGI("CppWebBookManager", "Running on port %s", port);
+  // HTTP server
+  oatpp::network::Server server(connectionProvider, connectionHandler);
 
-    // run server
-    server.run();
+  // log
+  OATPP_LOGi("CppWebBookManager", "Running on port {}", connectionProvider->getProperty("port").toString());
+
+  // run server
+  server.run();
 }
 
 int main()
 {
-    oatpp::base::Environment::init();
+  oatpp::Environment::init();
 
-    run();
+  run();
 
-    oatpp::base::Environment::destroy();
+  oatpp::Environment::destroy();
 
-    return 0;
+  return 0;
 }

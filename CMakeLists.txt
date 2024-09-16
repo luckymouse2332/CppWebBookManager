@@ -6,10 +6,14 @@ set(CMAKE_CXX_STANDARD 11)
 
 project(${project_name})
 
-add_library(${project_name}-lib src/AppComponents.hpp)
+add_library(${project_name}-lib 
+    src/AppComponents.hpp
+    src/dto/DTOs.hpp
+    src/controller/MyController.hpp
+    src/controller/MyController.cpp)
 
 ## link libraries
-find_package(oatpp 1.3.0 REQUIRED)
+find_package(oatpp 1.4.0 REQUIRED)
 target_link_libraries(${project_name}-lib
     PUBLIC oatpp::oatpp
     PUBLIC oatpp::oatpp-test
