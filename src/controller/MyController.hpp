@@ -1,6 +1,8 @@
 #ifndef MY_CONTROLLER
 #define MY_CONTROLLER
 
+#include "constants/LogFlag.hpp"
+
 // Dto
 #include "dto/DTOs.hpp"
 
@@ -25,6 +27,7 @@ public:
 
 public:
   ENDPOINT("GET", "/", home) {
+    OATPP_LOGi(APP_NAME, "Get request!");
     auto dto = MessageDto::createShared();
     dto->statusCode = 200;
     dto->message = "Hello world!";

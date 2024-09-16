@@ -22,7 +22,7 @@ void run()
   oatpp::network::Server server(connectionProvider, connectionHandler);
 
   // log
-  OATPP_LOGi("CppWebBookManager", "Running on port {}", connectionProvider->getProperty("port").toString());
+  OATPP_LOGi(APP_NAME, "Running on port {}", connectionProvider->getProperty("port").toString());
 
   // run server
   server.run();
