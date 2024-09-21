@@ -26,11 +26,20 @@ public:
       : oatpp::web::server::api::ApiController(contentMappers) {}
 
 public:
-  ENDPOINT("GET", "/", home) {
-    OATPP_LOGi(APP_NAME, "Get request!");
+  static std::shared_ptr<MyController> createShared(
+      OATPP_COMPONENT(std::shared_ptr<oatpp::web::mime::ContentMappers>, apiContentMappers) // Inject ContentMappers
+  )
+  {
+    return std::make_shared<MyController>(apiContentMappers);
+  }
+
+  ENDPOINT("GET", "/", getHome)
+  {
     auto dto = MessageDto::createShared();
+
     dto->statusCode = 200;
     dto->message = "Hello world!";
+
     return createDtoResponse(Status::CODE_200, dto);
   }
 };

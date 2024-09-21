@@ -3,6 +3,8 @@
 
 #include "oatpp/network/Server.hpp"
 
+#include "oatpp-swagger/Controller.hpp"
+
 void run()
 {
   AppComponent components;
@@ -10,7 +12,11 @@ void run()
   // router
   OATPP_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, router);
 
-  router->addController(std::make_shared<MyController>());
+  oatpp::web::server::api::Endpoints docEndpoints;
+
+  docEndpoints.append(router->addController(MyController::createShared())->getEndpoints());
+
+  router->addController(oatpp::swagger::Controller::createShared(docEndpoints));
 
   // The router's http request handler
   OATPP_COMPONENT(std::shared_ptr<oatpp::network::ConnectionHandler>, connectionHandler);

@@ -13,12 +13,19 @@
 
 #include "oatpp/macro/component.hpp"
 
+#include "components/SwaggerComponent.hpp"
+
 /**
  * Register component the app need
  */
 class AppComponent
 {
 public:
+
+  /**
+   *  Swagger component
+   */
+  SwaggerComponent swaggerComponent;
 
   /**
    * Connection Provider which bind port
@@ -36,6 +43,7 @@ public:
 
   /**
    * Connection Handler 
+   * Use async connection handler
    */
   OATPP_CREATE_COMPONENT(std::shared_ptr<oatpp::network::ConnectionHandler>, connectionHandler)([] {
     OATPP_COMPONENT(std::shared_ptr<oatpp::web::server::HttpRouter>, router); // Get router from container

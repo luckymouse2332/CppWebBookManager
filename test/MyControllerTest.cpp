@@ -23,7 +23,7 @@ void MyControllerTest::onRun() {
     auto requestExecutor = oatpp::web::client::HttpRequestExecutor::createShared(clientConnectionProvider);
     auto client = MyApiTestClient::createShared(requestExecutor, contentMappers->getMapper("application/json"));
 
-    auto response = client->getRoot();
+    auto response = client->getAsyncHome();
 
     OATPP_ASSERT(response->getStatusCode() == 200);
 
